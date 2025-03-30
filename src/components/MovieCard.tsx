@@ -1,4 +1,5 @@
 import { Box, Image, Text } from "@chakra-ui/react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Movie } from "../types/movie";
 
 interface Props {
@@ -6,6 +7,7 @@ interface Props {
 }
 
 const MovieCard = ({ movie }: Props) => {
+  const [_, setSearchParams] = useSearchParams();
   if (!movie.id) return null;
   return (
     <Box
@@ -14,6 +16,8 @@ const MovieCard = ({ movie }: Props) => {
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
+      cursor="pointer"
+      onClick={() => setSearchParams(`id=${movie.id}`)}
     >
       <Image
         src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}

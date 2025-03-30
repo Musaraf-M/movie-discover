@@ -8,7 +8,6 @@ import {
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { ToggleThemeButton } from "./components/ToggleThemeButton";
 import Home from "./pages/Home";
-import MovieDetail from "./pages/MovieDetails";
 import theme from "./theme";
 
 const App = () => {
@@ -26,7 +25,6 @@ const App = () => {
           </HStack>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/movie/:id" element={<MovieDetail />} />
           </Routes>
         </Container>
       </Router>

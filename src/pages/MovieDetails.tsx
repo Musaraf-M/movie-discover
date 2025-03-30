@@ -1,14 +1,42 @@
-import { useParams } from "react-router-dom";
-import { Box, Text, Heading } from "@chakra-ui/react";
+import {
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+} from "@chakra-ui/react";
+import { useSearchParams } from "react-router-dom";
+import MovieDetailContent from "../components/MovieDetail";
 
 const MovieDetail = () => {
-  const { id } = useParams();
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const { onClose } = useDisclosure({
+    onClose: () => {
+      setSearchParams("");
+    },
+  });
   return (
-    <Box>
-      <Heading>Movie Details</Heading>
-      <Text>Movie ID: {id}</Text>
-    </Box>
+    <Modal
+      onClose={onClose}
+      isOpen={Boolean(searchParams.get("id"))}
+      isCentered
+      scrollBehavior="inside"
+      size="2xl"
+    >
+      <ModalOverlay
+        bg="blackAlpha.300"
+        backdropFilter="blur(10px) hue-rotate(90deg)"
+      />
+      <ModalContent>
+        <ModalHeader>Movie Details</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <MovieDetailContent id={searchParams.get("id")} />
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
 
