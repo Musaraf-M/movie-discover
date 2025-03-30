@@ -33,7 +33,7 @@ const MovieDetail = () => {
         <ModalHeader>Movie Details</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <MovieDetailContent id={searchParams.get("id")} />
+          <MovieDetailContent id={Number(searchParams.get("id"))} />
         </ModalBody>
       </ModalContent>
     </Modal>

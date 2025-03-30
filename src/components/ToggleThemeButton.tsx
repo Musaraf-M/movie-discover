@@ -5,7 +5,12 @@ export const ToggleThemeButton = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Button onClick={toggleColorMode} display="flex" justifySelf="flex-end">
+    <Button
+      onClick={toggleColorMode}
+      display="flex"
+      justifySelf="flex-end"
+      size="sm"
+    >
       {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
     </Button>
   );

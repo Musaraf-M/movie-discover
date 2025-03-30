@@ -1,4 +1,4 @@
-import { MovieResponse } from "@/types/movie";
+import { Movie, MovieResponse } from "@/types/movie";
 import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -6,7 +6,7 @@ const BASE_URL = "https://api.themoviedb.org/3";
 
 export const fetchMovies = async (
   query: string = "",
-  pageParam = 1,
+  pageParam: number = 1,
   filters: { genre?: number; year?: number; rating?: [number, number] } = {}
 ): Promise<MovieResponse> => {
   const endpoint = query ? "/search/movie" : "/discover/movie";
@@ -33,9 +33,18 @@ export const fetchMovies = async (
   return data;
 };
 
-export const fetchMovieDetail = async (id: string) => {
+export const fetchMovieDetail = async (id: string): Promise<Movie> => {
   const { data } = await axios.get(`${BASE_URL}/movie/${id}`, {
     params: { api_key: API_KEY, append_to_response: "credits" },
   });
   return data;
+};
+
+export const fetchMoviesByIds = async (ids: number[]) => {
+  if (!ids.length) return [];
+  const promises = ids.map((id) =>
+    axios.get(`${BASE_URL}/movie/${id}`, { params: { api_key: API_KEY } })
+  );
+  const responses = await Promise.all(promises);
+  return responses.map((res) => res.data);
 };

@@ -1,54 +1,104 @@
-# React + TypeScript + Vite
+# 🎬 Movie Discover
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A feature-rich movie discovery platform built using **React**, **Chakra UI**, and **React Query**, powered by the **TMDB API**. Users can browse popular movies, search by title, filter by genre, release year, rating, and view detailed movie information.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🔹 Core Features
+- **Movie Listing**: Grid layout with infinite scrolling for browsing popular movies.
+- **Search & Filters**:
+  - Search movies by title in real-time.
+  - Filter by genre, release year, and rating.
+- **Movie Details**:
+  - View full plot description, cast, crew, user ratings, reviews.
+  - Watch trailers (if available).
+- **Responsive Design**: Optimized for both desktop and mobile.
 
-## Expanding the ESLint configuration
+### 🔹 Additional Features
+- **Dark/Light Mode** 🌗
+- **Watchlist**: Save favorite movies to local storage.
+- **Smooth UI Animations**
+- **Optimized API Calls**: Data fetching using React Query with caching & pagination.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🛠️ Tech Stack
+- **Frontend**: React (TypeScript), Chakra UI
+- **State Management**: React Query
+- **API**: TMDB API
+- **Routing**: React Router
+
+## 📦 Installation
+
+1. **Clone the Repository**
+```sh
+git clone https://github.com/Musaraf-M/movie-discover.git
+cd movie-discover
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. **Install Dependencies**
+```sh
+npm install
 ```
+
+3. **Set Up Environment Variables**
+Create a `.env` file in the root directory and add your TMDB API key:
+```
+VITE_TMDB_API_KEY=your_api_key_here
+```
+
+4. **Run the Project**
+```sh
+npm run dev
+```
+
+---
+
+## 📂 Project Structure
+```
+📦 movie-discover
+├── 📂 src
+│   ├── 📂 components  # UI Components
+│   ├── 📂 hooks       # Custom Hooks for API Calls
+│   ├── 📂 pages       # Page Components
+│   ├── 📂 utils       # Utility Functions
+│   ├── main.tsx      # Entry Point
+│   ├── app.tsx       # Routes & Layout
+├── .env              # Environment Variables
+├── package.json      # Dependencies & Scripts
+├── README.md         # Project Documentation
+```
+
+---
+
+## 🌎 Deployment
+- Deployed on **Vercel**
+- Live Demo: [your-demo-link](https://your-demo-url.vercel.app)
+
+---
+
+## 🛠️ Future Enhancements
+- **User Authentication** for personal watchlists.
+- **Movie Reviews & Ratings** by users.
+- **Social Sharing** for movie pages.
+
+---
+
+## 🤝 Contribution
+1. **Fork the repository**
+2. **Create a new branch**
+```sh
+git checkout -b feature-name
+```
+3. **Commit changes & push**
+```sh
+git commit -m "Added new feature"
+git push origin feature-name
+```
+4. **Create a Pull Request**
+
+---
+
+## 📄 License
+This project is **MIT Licensed**. Feel free to use and modify! 🎥✨
+

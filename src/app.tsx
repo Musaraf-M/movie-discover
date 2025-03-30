@@ -1,33 +1,26 @@
-import {
-  ChakraProvider,
-  ColorModeScript,
-  Container,
-  HStack,
-  Text,
-} from "@chakra-ui/react";
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { ToggleThemeButton } from "./components/ToggleThemeButton";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import Watchlist from "./pages/Watchlist";
 import theme from "./theme";
+import { WatchlistProvider } from "./WatchlistContext";
 
 const App = () => {
   // const theme = extendTheme({});
   return (
     <ChakraProvider theme={theme}>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <Router>
-        <Container maxW="container.xl" py={6}>
-          <HStack w="full" justifyContent="space-between">
-            <Text fontSize="3xl" fontWeight="900" textColor="headerText">
-              Movie Discover
-            </Text>
-            <ToggleThemeButton />
-          </HStack>
-          <Routes>
-            <Route path="/" element={<Home />} />
-          </Routes>
-        </Container>
-      </Router>
+      <WatchlistProvider>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        <Router>
+          <Navbar>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/watchlist" element={<Watchlist />} />
+            </Routes>
+          </Navbar>
+        </Router>
+      </WatchlistProvider>
     </ChakraProvider>
   );
 };
