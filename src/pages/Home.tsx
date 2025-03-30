@@ -1,24 +1,30 @@
-import { Box, Grid, Spinner, Text, VStack } from "@chakra-ui/react";
+import { Grid, Spinner, Text, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import InfiniteScrollTrigger from "../components/InfiniteScrollTrigger";
 import MovieCard from "../components/MovieCard";
 import MovieFilters from "../components/MovieFilters";
 import SearchBar from "../components/SearchBar";
+import { useDebounce } from "../hooks/useDebounce";
 import { useMovies } from "../hooks/useFetchMovies";
 import MovieDetail from "./MovieDetails";
+export interface FilterType {
+  genre?: number;
+  year?: number;
+  rating?: [number, number];
+}
 
 const Home = () => {
   const [query, setQuery] = useState("");
-  const [filters, setFilters] = useState<{
-    genre?: number;
-    year?: number;
-    rating?: [number, number];
-  }>({});
+  const debouncedQuery = useDebounce(query, 500);
+
+  const [filters, setFilters] = useState<FilterType>({});
+
+  const debouncedFilters = useDebounce(filters, 500);
 
   const { data, fetchNextPage, hasNextPage, isLoading, isFetching, isError } =
-    useMovies(query, filters);
+    useMovies(debouncedQuery, debouncedFilters);
 
-  const movies = data?.pages.flatMap((page) => page.results) || [];
+  const movies = data?.pages.flatMap((page) => (page as any).results) || [];
 
   return (
     <VStack w="full" alignItems="normal" p="4">

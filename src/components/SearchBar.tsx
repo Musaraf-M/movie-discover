@@ -14,17 +14,21 @@ const SearchBar = ({
         placeholder="Search for a movie..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        size="lg"
+        size="sm"
         focusBorderColor="teal.500"
+        variant="filled"
+        borderRadius="md"
+        _placeholder={{ color: "gray.500" }}
       />
       {query && (
         <IconButton
           icon={<CloseIcon />}
           aria-label="Clear search"
           onClick={() => setQuery("")}
+          size="sm"
         />
       )}
-      <IconButton icon={<SearchIcon />} aria-label="Search" />
+      <IconButton icon={<SearchIcon />} aria-label="Search" size="sm" />
     </Flex>
   );
 };
