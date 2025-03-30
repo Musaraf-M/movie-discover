@@ -1,5 +1,5 @@
 import { Box, Image, Text } from "@chakra-ui/react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Movie } from "../types/movie";
 
 interface Props {

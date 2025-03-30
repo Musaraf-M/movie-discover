@@ -1,5 +1,4 @@
 import { Box, Grid, Image, Spinner, Text, VStack } from "@chakra-ui/react";
-import { useParams } from "react-router-dom";
 import { useMovieDetail } from "../hooks/useMovieDetail";
 
 const MovieDetailContent = ({ id }) => {
