@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const defaultValue = {
   watchlist: [] as number[],
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  toggleWatchlist: any,
+  toggleWatchlist: (() => {}) as any,
 };
 
 const WatchlistContext = createContext(defaultValue);
