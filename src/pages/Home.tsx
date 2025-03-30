@@ -1,62 +1,45 @@
-import {
-  Box,
-  Container,
-  Grid,
-  Heading,
-  Image,
-  Spinner,
-  Text,
-} from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { fetchMovies, Movie } from "../utils/api";
+import { Box, Grid, Spinner, Text, VStack } from "@chakra-ui/react";
+import { useState } from "react";
+import InfiniteScrollTrigger from "../components/InfiniteScrollTrigger";
+import MovieCard from "../components/MovieCard";
+import MovieFilters from "../components/MovieFilters";
+import SearchBar from "../components/SearchBar";
+import { useMovies } from "../hooks/useFetchMovies";
 
 const Home = () => {
-  console.log("check");
+  const [query, setQuery] = useState("");
+  const [filters, setFilters] = useState<{
+    genre?: number;
+    year?: number;
+    rating?: [number, number];
+  }>({});
 
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const { data, fetchNextPage, hasNextPage, isLoading, isFetching, isError } =
+    useMovies(query, filters);
 
-  useEffect(() => {
-    fetchMovies<Movie>("/movie/popular")
-      .then((data) => setMovies(data.results))
-      .finally(() => setLoading(false));
-  }, []);
+  const movies = data?.pages.flatMap((page) => page.results) || [];
 
   return (
-    <Container maxW="container.xl" py={6}>
-      <Heading mb={6} textAlign="center">
-        Popular Movies
-      </Heading>
+    <VStack w="full" alignItems="normal" p="4">
+      <SearchBar query={query} setQuery={setQuery} />
+      <MovieFilters filters={filters} setFilters={setFilters} />
 
-      {loading ? (
-        <Box textAlign="center">
-          <Spinner size="xl" />
-        </Box>
-      ) : (
-        <Grid templateColumns="repeat(auto-fit, minmax(200px, 1fr))" gap={6}>
-          {movies.map((movie) => (
-            <Box
-              key={movie.id}
-              p={4}
-              borderWidth="1px"
-              borderRadius="lg"
-              overflow="hidden"
-            >
-              <Image
-                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                alt={movie.title}
-                borderRadius="md"
-                _hover={{ transform: "scale(1.05)", transition: "0.3s" }}
-              />
-              <Text fontWeight="bold" mt={2}>
-                {movie.title} ({movie.release_date.split("-")[0]})
-              </Text>
-              <Text fontSize="sm">⭐ {movie.vote_average.toFixed(1)}</Text>
-            </Box>
-          ))}
-        </Grid>
+      {isError && <Text color="red.400">Error loading movies.</Text>}
+
+      <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={4}>
+        {movies.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </Grid>
+
+      {(isLoading || isFetching) && (
+        <VStack>
+          <Spinner size="xl" mt={4} textAlign="center" />
+        </VStack>
       )}
-    </Container>
+
+      {hasNextPage && <InfiniteScrollTrigger loadMore={fetchNextPage} />}
+    </VStack>
   );
 };
 
