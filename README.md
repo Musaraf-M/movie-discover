@@ -73,7 +73,7 @@ npm run dev
 
 ## 🌎 Deployment
 - Deployed on **Vercel**
-- Live Demo: [your-demo-link](https://movie-discover-ljpox91q2-musarafms-projects.vercel.app)
+- Live Demo: [movie-discover](https://movie-discover-ljpox91q2-musarafms-projects.vercel.app)
 
 ---
 
