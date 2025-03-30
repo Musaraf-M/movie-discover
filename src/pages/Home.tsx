@@ -5,6 +5,7 @@ import MovieCard from "../components/MovieCard";
 import MovieFilters from "../components/MovieFilters";
 import SearchBar from "../components/SearchBar";
 import { useMovies } from "../hooks/useFetchMovies";
+import MovieDetail from "./MovieDetails";
 
 const Home = () => {
   const [query, setQuery] = useState("");
@@ -23,7 +24,7 @@ const Home = () => {
     <VStack w="full" alignItems="normal" p="4">
       <SearchBar query={query} setQuery={setQuery} />
       <MovieFilters filters={filters} setFilters={setFilters} />
-
+      <MovieDetail />
       {isError && <Text color="red.400">Error loading movies.</Text>}
 
       <Grid templateColumns="repeat(auto-fill, minmax(200px, 1fr))" gap={4}>
